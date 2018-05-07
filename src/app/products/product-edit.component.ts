@@ -1,40 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { MessageService } from '../messages/message.service';
 
 import { IProduct } from './product';
 import { ProductService } from './product.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './app/products/product-edit.component.html',
     styleUrls: ['./app/products/product-edit.component.css']
 })
-export class ProductEditComponent {
+export class ProductEditComponent implements OnInit{
     pageTitle: string = 'Product Edit';
     errorMessage: string;
 
     product: IProduct;
 
     constructor(private productService: ProductService,
-                private messageService: MessageService) { }
-
-    getProduct(id: number): void {
-        this.productService.getProduct(id)
-            .subscribe(
-                (product: IProduct) => this.onProductRetrieved(product),
-                (error: any) => this.errorMessage = <any>error
-            );
-    }
-
-    onProductRetrieved(product: IProduct): void {
-        this.product = product;
-
-        if (this.product.id === 0) {
-            this.pageTitle = 'Add Product';
-        } else {
-            this.pageTitle = `Edit Product: ${this.product.productName}`;
+                private messageService: MessageService,
+                private route: ActivatedRoute) { }
+    
+        ngOnInit(): void {
+          this.route.params.subscribe(
+              params => {
+                  let id = +params['id'];
+                  this.getProduct(id);
+              })
         }
-    }
+
+        getProduct(id: number): void {
+            this.productService.getProduct(id)
+                .subscribe(
+                    (product: IProduct) => this.onProductRetrieved(product),
+                    (error: any) => this.errorMessage = <any>error
+                );
+        }
+
+        onProductRetrieved(product: IProduct): void {
+            this.product = product;
+
+            if (this.product.id === 0) {
+                this.pageTitle = 'Add Product';
+            } else {
+                this.pageTitle = `Edit Product: ${this.product.productName}`;
+            }
+        }
 
     deleteProduct(): void {
         if (this.product.id === 0) {
