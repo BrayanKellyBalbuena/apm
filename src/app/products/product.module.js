@@ -15,13 +15,17 @@ var product_edit_component_1 = require('./product-edit.component');
 var product_filter_pipe_1 = require('./product-filter.pipe');
 var product_service_1 = require('./product.service');
 var shared_module_1 = require('../shared/shared.module');
+var router_1 = require('@angular/router');
 var ProductModule = (function () {
     function ProductModule() {
     }
     ProductModule = __decorate([
         core_1.NgModule({
             imports: [
-                shared_module_1.SharedModule
+                shared_module_1.SharedModule,
+                router_1.RouterModule.forChild([
+                    { path: 'products', component: product_list_component_1.ProductListComponent }
+                ])
             ],
             declarations: [
                 product_list_component_1.ProductListComponent,
