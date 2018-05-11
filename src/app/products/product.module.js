@@ -25,16 +25,23 @@ var ProductModule = (function () {
             imports: [
                 shared_module_1.SharedModule,
                 router_1.RouterModule.forChild([
-                    { path: 'products', component: product_list_component_1.ProductListComponent },
                     {
-                        path: 'products/:id',
-                        component: product_detail_component_1.ProductDetailComponent,
-                        resolve: { product: product_resolver_service_1.ProductResolver }
+                        path: 'products',
+                        children: [{
+                                path: '',
+                                component: product_list_component_1.ProductListComponent
+                            },
+                            {
+                                path: ':id',
+                                component: product_detail_component_1.ProductDetailComponent,
+                                resolve: { product: product_resolver_service_1.ProductResolver }
+                            },
+                            {
+                                path: ':id/edit',
+                                component: product_edit_component_1.ProductEditComponent,
+                                resolve: { product: product_resolver_service_1.ProductResolver }
+                            }]
                     },
-                    { path: 'products/:id/edit',
-                        component: product_edit_component_1.ProductEditComponent,
-                        resolve: { product: product_resolver_service_1.ProductResolver }
-                    }
                 ])
             ],
             declarations: [
