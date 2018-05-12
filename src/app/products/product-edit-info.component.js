@@ -17,6 +17,13 @@ var ProductEditInfoComponent = (function () {
         this.product = { id: 1, productName: 'test', productCode: 'test' };
     }
     ProductEditInfoComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this.route.parent.data.subscribe(function (data) {
+            _this.product = data['product'];
+            if (_this.productForm) {
+                _this.productForm.reset();
+            }
+        });
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm), 
