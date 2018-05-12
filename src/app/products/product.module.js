@@ -17,6 +17,8 @@ var product_service_1 = require('./product.service');
 var shared_module_1 = require('../shared/shared.module');
 var router_1 = require('@angular/router');
 var product_resolver_service_1 = require('./product-resolver.service');
+var product_edit_info_component_1 = require('./product-edit-info.component');
+var product_edit_tags_component_1 = require('./product-edit-tags.component');
 var ProductModule = (function () {
     function ProductModule() {
     }
@@ -39,12 +41,27 @@ var ProductModule = (function () {
                             {
                                 path: ':id/edit',
                                 component: product_edit_component_1.ProductEditComponent,
-                                resolve: { product: product_resolver_service_1.ProductResolver }
-                            }]
+                                resolve: { product: product_resolver_service_1.ProductResolver },
+                                children: [
+                                    {
+                                        path: '', redirectTo: 'info', pathMatch: 'full'
+                                    },
+                                    {
+                                        path: 'info',
+                                        component: product_edit_info_component_1.ProductEditInfoComponent,
+                                    },
+                                    {
+                                        path: 'tags',
+                                        component: product_edit_tags_component_1.ProductEditTagsComponent
+                                    }]
+                            },
+                        ]
                     },
                 ])
             ],
             declarations: [
+                product_edit_tags_component_1.ProductEditTagsComponent,
+                product_edit_info_component_1.ProductEditInfoComponent,
                 product_list_component_1.ProductListComponent,
                 product_detail_component_1.ProductDetailComponent,
                 product_edit_component_1.ProductEditComponent,
