@@ -19,6 +19,7 @@ var product_filter_pipe_1 = require('./product-filter.pipe');
 var product_service_1 = require('./product.service');
 var product_resolver_service_1 = require('./product-resolver.service');
 var shared_module_1 = require('../shared/shared.module');
+var auth_guard_service_1 = require('../user/auth-guard.service');
 var ProductModule = (function () {
     function ProductModule() {
     }
@@ -29,6 +30,7 @@ var ProductModule = (function () {
                 router_1.RouterModule.forChild([
                     {
                         path: 'products',
+                        canActivate: [auth_guard_service_1.AuthGuard],
                         children: [
                             {
                                 path: '',
