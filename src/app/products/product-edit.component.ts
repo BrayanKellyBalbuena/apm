@@ -5,6 +5,7 @@ import { MessageService } from '../messages/message.service';
 
 import { IProduct } from './product';
 import { ProductService } from './product.service';
+import { BoundElementPropertyAst } from '@angular/compiler';
 
 @Component({
     templateUrl: './app/products/product-edit.component.html',
@@ -13,9 +14,22 @@ import { ProductService } from './product.service';
 export class ProductEditComponent implements OnInit {
     pageTitle: string = 'Product Edit';
     errorMessage: string;
-
-    product: IProduct;
     private dataIsValid: { [key: string]: boolean } = {};
+
+    private originalProduct: IProduct;
+    private currentProduct: IProduct;
+
+   get product(): IProduct{
+       return this.currentProduct;
+   }
+   set product(value: IProduct){
+       this.currentProduct = value;
+       this.originalProduct = Object.assign({}, value);
+   }
+
+   get isDirty():boolean {
+       return JSON.stringify(this.originalProduct) !== JSON.stringify(this.originalProduct);
+   }
 
     constructor(private productService: ProductService,
                 private messageService: MessageService,
@@ -36,6 +50,12 @@ export class ProductEditComponent implements OnInit {
         } else {
             this.pageTitle = `Edit Product: ${this.product.productName}`;
         }
+    }
+
+    reset(): void{
+        this.dataIsValid = null;
+        this.currentProduct = null;
+        this.originalProduct = null;
     }
 
     deleteProduct(): void {
@@ -78,6 +98,7 @@ export class ProductEditComponent implements OnInit {
         if (message) {
             this.messageService.addMessage(message);
         }
+        this.reset();
 
         // Navigate back to the product list
         this.router.navigate(['/products']);
