@@ -9,13 +9,11 @@ import { MessageService } from './message.service';
 @NgModule({
     imports: [
         SharedModule,
-        RouterModule.forChild([
-            {
-                path: 'messages',
-                component: MessageComponent,
-                outlet: 'popup'
-            }
-        ])
+        RouterModule.forChild([{
+            path: 'messages',
+            component: MessageComponent,
+            outlet: 'popup'
+        }])
     ],
     declarations: [
         MessageComponent

@@ -20,13 +20,11 @@ var MessageModule = (function () {
         core_1.NgModule({
             imports: [
                 shared_module_1.SharedModule,
-                router_1.RouterModule.forChild([
-                    {
+                router_1.RouterModule.forChild([{
                         path: 'messages',
                         component: message_component_1.MessageComponent,
                         outlet: 'popup'
-                    }
-                ])
+                    }])
             ],
             declarations: [
                 message_component_1.MessageComponent
