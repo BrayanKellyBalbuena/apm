@@ -6,6 +6,7 @@ import { HttpModule } from '@angular/http';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ProductData } from './products/product-data';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from './home/welcome.component';
 import { PageNotFoundComponent } from './page-not-found.component';
@@ -14,17 +15,16 @@ import { PageNotFoundComponent } from './page-not-found.component';
 import { ProductModule } from './products/product.module';
 import { UserModule } from './user/user.module';
 import { MessageModule } from './messages/message.module';
-import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(ProductData, { delay: 1000 }),
-    UserModule,
     ProductModule,
+    UserModule,
     MessageModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
   declarations: [
     AppComponent,

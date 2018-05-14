@@ -9,14 +9,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 var message_service_1 = require('../messages/message.service');
 var product_service_1 = require('./product.service');
-var router_1 = require('@angular/router');
 var ProductEditComponent = (function () {
-    function ProductEditComponent(productService, messageService, route) {
+    function ProductEditComponent(productService, messageService, route, router) {
         this.productService = productService;
         this.messageService = messageService;
         this.route = route;
+        this.router = router;
         this.pageTitle = 'Product Edit';
         this.dataIsValid = {};
     }
@@ -57,6 +58,23 @@ var ProductEditComponent = (function () {
         return (this.dataIsValid &&
             Object.keys(this.dataIsValid).every(function (d) { return _this.dataIsValid[d] === true; }));
     };
+    ProductEditComponent.prototype.saveProduct = function () {
+        var _this = this;
+        if (this.isValid(null)) {
+            this.productService.saveProduct(this.product)
+                .subscribe(function () { return _this.onSaveComplete(_this.product.productName + " was saved"); }, function (error) { return _this.errorMessage = error; });
+        }
+        else {
+            this.errorMessage = 'Please correct the validation errors.';
+        }
+    };
+    ProductEditComponent.prototype.onSaveComplete = function (message) {
+        if (message) {
+            this.messageService.addMessage(message);
+        }
+        // Navigate back to the product list
+        this.router.navigate(['/products']);
+    };
     ProductEditComponent.prototype.validate = function () {
         // Clear the validation object
         this.dataIsValid = {};
@@ -78,28 +96,12 @@ var ProductEditComponent = (function () {
             this.dataIsValid['tags'] = false;
         }
     };
-    ProductEditComponent.prototype.saveProduct = function () {
-        var _this = this;
-        if (true === true) {
-            this.productService.saveProduct(this.product)
-                .subscribe(function () { return _this.onSaveComplete(_this.product.productName + " was saved"); }, function (error) { return _this.errorMessage = error; });
-        }
-        else {
-            this.errorMessage = 'Please correct the validation errors.';
-        }
-    };
-    ProductEditComponent.prototype.onSaveComplete = function (message) {
-        if (message) {
-            this.messageService.addMessage(message);
-        }
-        // Navigate back to the product list
-    };
     ProductEditComponent = __decorate([
         core_1.Component({
             templateUrl: './app/products/product-edit.component.html',
             styleUrls: ['./app/products/product-edit.component.css']
         }), 
-        __metadata('design:paramtypes', [product_service_1.ProductService, message_service_1.MessageService, router_1.ActivatedRoute])
+        __metadata('design:paramtypes', [product_service_1.ProductService, message_service_1.MessageService, router_1.ActivatedRoute, router_1.Router])
     ], ProductEditComponent);
     return ProductEditComponent;
 }());

@@ -14,7 +14,6 @@ var forms_1 = require('@angular/forms');
 var ProductEditInfoComponent = (function () {
     function ProductEditInfoComponent(route) {
         this.route = route;
-        this.product = { id: 1, productName: 'test', productCode: 'test' };
     }
     ProductEditInfoComponent.prototype.ngOnInit = function () {
         var _this = this;

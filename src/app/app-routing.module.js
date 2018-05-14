@@ -8,10 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require("@angular/core");
-var router_1 = require("@angular/router");
-var welcome_component_1 = require("./home/welcome.component");
-var page_not_found_component_1 = require("./page-not-found.component");
+var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var welcome_component_1 = require('./home/welcome.component');
+var page_not_found_component_1 = require('./page-not-found.component');
 var AppRoutingModule = (function () {
     function AppRoutingModule() {
     }
@@ -22,7 +22,7 @@ var AppRoutingModule = (function () {
                     { path: 'welcome', component: welcome_component_1.WelcomeComponent },
                     { path: '', redirectTo: 'welcome', pathMatch: 'full' },
                     { path: '**', component: page_not_found_component_1.PageNotFoundComponent }
-                ]),
+                ], { enableTracing: true })
             ],
             exports: [router_1.RouterModule]
         }), 

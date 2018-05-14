@@ -5,7 +5,7 @@
 
     <div class="panel-body" *ngIf="product">
         <div class="wizard">
-            <a [routerLink]="['info']" routerLinkActive="activate">
+            <a [routerLink]="['info']" routerLinkActive="active">
                 Basic Information <span [ngClass]="{'glyphicon glyphicon-exclamation-sign': !isValid('info')}"></span>
             </a>
             <a [routerLink]="['tags']" routerLinkActive="active">

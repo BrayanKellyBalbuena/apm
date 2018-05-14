@@ -8,10 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var router_1 = require("@angular/router");
-var product_service_1 = require("./product.service");
-var Observable_1 = require("rxjs/Observable");
-var core_1 = require("@angular/core");
+var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
+var Observable_1 = require('rxjs/Observable');
+require('rxjs/add/observable/of');
+require('rxjs/add/operator/catch');
+require('rxjs/add/operator/map');
+var product_service_1 = require('./product.service');
 var ProductResolver = (function () {
     function ProductResolver(productService, router) {
         this.productService = productService;
@@ -21,22 +24,21 @@ var ProductResolver = (function () {
         var _this = this;
         var id = route.params['id'];
         if (isNaN(id)) {
-            console.error("Product id was not a number: " + id);
+            console.log("Product id was not a number: " + id);
             this.router.navigate(['/products']);
             return Observable_1.Observable.of(null);
         }
         return this.productService.getProduct(+id)
-            .map(function (p) {
-            if (p) {
-                console.info("Product was not found: " + id);
-                return p;
+            .map(function (product) {
+            if (product) {
+                return product;
             }
-            console.info("Product was not found: " + id);
+            console.log("Product was not found: " + id);
             _this.router.navigate(['/products']);
             return null;
         })
             .catch(function (error) {
-            console.error("Retrieval error: " + error);
+            console.log("Retrieval error: " + error);
             _this.router.navigate(['/products']);
             return Observable_1.Observable.of(null);
         });

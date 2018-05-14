@@ -9,8 +9,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var product_service_1 = require('./product.service');
 var router_1 = require('@angular/router');
+var product_service_1 = require('./product.service');
 var ProductListComponent = (function () {
     function ProductListComponent(productService, route) {
         this.productService = productService;
@@ -26,7 +26,7 @@ var ProductListComponent = (function () {
     ProductListComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.listFilter = this.route.snapshot.queryParams['filterBy'] || '';
-        this.showImage = this.route.snapshot.queryParams['showImage'] === true;
+        this.showImage = this.route.snapshot.queryParams['showImage'] === 'true';
         this.productService.getProducts()
             .subscribe(function (products) { return _this.products = products; }, function (error) { return _this.errorMessage = error; });
     };

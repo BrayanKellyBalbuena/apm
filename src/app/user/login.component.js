@@ -9,12 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var auth_service_1 = require('./auth.service');
 var router_1 = require('@angular/router');
+var auth_service_1 = require('./auth.service');
 var LoginComponent = (function () {
-    function LoginComponent(authService, _route) {
+    function LoginComponent(authService, router) {
         this.authService = authService;
-        this._route = _route;
+        this.router = router;
         this.pageTitle = 'Log In';
     }
     LoginComponent.prototype.login = function (loginForm) {
@@ -23,7 +23,7 @@ var LoginComponent = (function () {
             var password = loginForm.form.value.password;
             this.authService.login(userName, password);
             // Navigate to the Product List page after log in.
-            this._route.navigate(['/products']);
+            this.router.navigate(['/products']);
         }
         else {
             this.errorMessage = 'Please enter a user name and password.';
