@@ -10,7 +10,7 @@ import { AuthGuard } from './user/auth-guard.service';
         RouterModule.forRoot([
             { path: 'welcome', component: WelcomeComponent },
             { path: 'products',
-             canDeactivate: [AuthGuard],
+             canLoad: [AuthGuard],
              loadChildren: 'app/products/product.module#ProductModule'},
             { path: '', redirectTo: 'welcome', pathMatch: 'full' },
             { path: '**', component: PageNotFoundComponent }
